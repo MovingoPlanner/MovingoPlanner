@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct MovingoPlannerApp: App {
+    @StateObject private var settings = AppSettings.shared
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainTabView()
+                .environmentObject(AppSettings.shared)
+                .environment(\.locale, AppSettings.shared.language.locale)
         }
     }
 }
