@@ -14,8 +14,9 @@ struct MovingoPlannerApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabView()
-                .environmentObject(AppSettings.shared)
-                .environment(\.locale, AppSettings.shared.language.locale)
+                .environmentObject(settings)
+                .environment(\.locale, settings.language.locale)
+                .tint(AppTheme.accent)
         }
     }
 }

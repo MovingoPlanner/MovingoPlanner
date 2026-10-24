@@ -59,7 +59,8 @@ struct MainTabView: View {
                 Label("Mer", systemImage: "ellipsis")
             }
         }
-        .tint(.blue)
+        .tint(AppTheme.accent)
+        .background(AppTheme.background)
         .environment(\.locale, settings.language.locale)
         .environmentObject(savedJourneysStore)
         .environmentObject(journeyNavigation)
@@ -169,7 +170,7 @@ private struct PlaceholderTabView: View {
         VStack(spacing: 16) {
             Image(systemName: symbol)
                 .font(.system(size: 40, weight: .medium))
-                .foregroundStyle(.blue)
+                .foregroundStyle(AppTheme.accent)
 
             Text(title)
                 .font(.largeTitle.bold())
@@ -181,7 +182,7 @@ private struct PlaceholderTabView: View {
         }
         .padding(24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(uiColor: .systemGroupedBackground))
+        .background(AppTheme.background)
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
     }

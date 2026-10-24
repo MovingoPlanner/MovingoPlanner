@@ -120,7 +120,7 @@ struct JourneyResultsView: View {
             }
             .padding(20)
         }
-        .background(Color(uiColor: .systemGroupedBackground))
+        .background(AppTheme.background)
         .navigationTitle("Reseförslag")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -199,7 +199,7 @@ struct JourneyResultsView: View {
             HStack(spacing: 8) {
                 if viewModel.isLoadingJourneys {
                     ProgressView()
-                        .tint(.blue)
+                        .tint(AppTheme.accent)
                 } else {
                     Image(systemName: "arrow.clockwise")
                 }
@@ -211,11 +211,15 @@ struct JourneyResultsView: View {
                 )
             }
             .font(.subheadline.weight(.semibold))
-            .foregroundStyle(.blue)
+            .foregroundStyle(AppTheme.accent)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
-            .background(.regularMaterial)
+            .background(AppTheme.surface)
             .clipShape(RoundedRectangle(cornerRadius: 14))
+            .overlay {
+                RoundedRectangle(cornerRadius: 14)
+                    .strokeBorder(AppTheme.separator, lineWidth: 1)
+            }
         }
         .buttonStyle(.plain)
         .disabled(viewModel.isLoadingJourneys)
@@ -257,10 +261,10 @@ struct JourneyResultsView: View {
                             : "MINST BYTEN"
                     )
                     .font(.caption2.weight(.bold))
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(AppTheme.accent)
                     .padding(.horizontal, 9)
                     .padding(.vertical, 6)
-                    .background(.blue.opacity(0.1))
+                    .background(AppTheme.accent.opacity(0.12))
                     .clipShape(Capsule())
                 }
             }
@@ -275,7 +279,7 @@ struct JourneyResultsView: View {
             // Origin and destination
             HStack(alignment: .top, spacing: 10) {
                 Image(systemName: "circle.circle")
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(AppTheme.accent)
 
                 Text(journey.originName)
                     .lineLimit(2)
@@ -293,7 +297,7 @@ struct JourneyResultsView: View {
                     .lineLimit(2)
 
                 Image(systemName: "mappin.circle.fill")
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(AppTheme.accent)
             }
             .font(.subheadline.weight(.medium))
 
@@ -313,21 +317,21 @@ struct JourneyResultsView: View {
 
                 Image(systemName: "chevron.right")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(AppTheme.accent)
 
                 Text("Detaljer")
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(AppTheme.accent)
             }
             .font(.caption)
             .foregroundStyle(.secondary)
         }
         .padding(16)
-        .background(.regularMaterial)
+        .background(AppTheme.surface)
         .clipShape(RoundedRectangle(cornerRadius: 22))
         .overlay {
             RoundedRectangle(cornerRadius: 22)
-                .strokeBorder(.primary.opacity(0.05))
+                .strokeBorder(AppTheme.separator, lineWidth: 1)
         }
         .contentShape(RoundedRectangle(cornerRadius: 22))
     }

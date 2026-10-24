@@ -54,7 +54,7 @@ struct ContentView: View {
                 }
                 .padding(20)
             }
-            .background(Color(uiColor: .systemGroupedBackground))
+            .background(AppTheme.background)
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $showingResults) {
                 JourneyResultsView(
@@ -67,10 +67,10 @@ struct ContentView: View {
                     HStack {
                         Text("Trafikläget")
                             .font(.headline)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(AppTheme.accent)
                         Image(systemName: "exclamationmark.triangle")
                             .font(.headline)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(AppTheme.accent)
                     }
                     .padding(10)
                 }
@@ -91,7 +91,7 @@ struct ContentView: View {
             Text("MOVINGO")
                 .font(.caption.weight(.bold))
                 .tracking(3)
-                .foregroundStyle(.blue)
+                .foregroundStyle(AppTheme.accent)
 
             Text("Vart ska vi?")
                 .font(.system(size: 38, weight: .bold))
@@ -137,7 +137,7 @@ struct ContentView: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 17)
             .foregroundStyle(.white)
-            .background(Color.blue)
+            .background(AppTheme.accent)
             .clipShape(RoundedRectangle(cornerRadius: 16))
         }
         .disabled(
@@ -175,7 +175,7 @@ struct ContentView: View {
                             }
                             .font(.caption.weight(.semibold))
                         }
-                        .foregroundStyle(.blue)
+                        .foregroundStyle(AppTheme.accent)
                     }
                 }
 
@@ -192,11 +192,11 @@ struct ContentView: View {
                         }
                     }
                 }
-                .background(.regularMaterial)
+                .background(AppTheme.surface)
                 .clipShape(RoundedRectangle(cornerRadius: 18))
                 .overlay {
                     RoundedRectangle(cornerRadius: 18)
-                        .strokeBorder(.primary.opacity(0.06))
+                        .strokeBorder(AppTheme.separator, lineWidth: 1)
                 }
             }
         }
@@ -212,15 +212,15 @@ struct ContentView: View {
                 // Route indicator
                 VStack(spacing: 3) {
                     Circle()
-                        .fill(.blue)
+                        .fill(AppTheme.accent)
                         .frame(width: 7, height: 7)
 
                     Rectangle()
-                        .fill(.blue.opacity(0.3))
+                        .fill(AppTheme.accent.opacity(0.3))
                         .frame(width: 2, height: 9)
 
                     Circle()
-                        .strokeBorder(.blue, lineWidth: 1.5)
+                        .strokeBorder(AppTheme.accent, lineWidth: 1.5)
                         .frame(width: 7, height: 7)
                 }
                 .frame(width: 12)
@@ -242,7 +242,7 @@ struct ContentView: View {
 
                 Image(systemName: "arrow.up.right")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(AppTheme.accent)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)

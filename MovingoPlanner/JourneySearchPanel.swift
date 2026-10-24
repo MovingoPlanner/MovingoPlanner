@@ -48,14 +48,14 @@ struct JourneySearchPanel: View {
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
                             .font(.system(size: 15, weight: .semibold))
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(AppTheme.accent)
                             .frame(width: 42, height: 42)
-                            .background(.background)
+                            .background(AppTheme.surface)
                             .clipShape(Circle())
                             .overlay {
                                 Circle()
                                     .strokeBorder(
-                                        .blue.opacity(0.2),
+                                        AppTheme.accent.opacity(0.25),
                                         lineWidth: 1
                                     )
                             }
@@ -74,11 +74,11 @@ struct JourneySearchPanel: View {
             .padding(.top, 18)
         }
         .padding(20)
-        .background(.regularMaterial)
+        .background(AppTheme.surface)
         .clipShape(RoundedRectangle(cornerRadius: 28))
         .overlay {
             RoundedRectangle(cornerRadius: 28)
-                .strokeBorder(.primary.opacity(0.05))
+                .strokeBorder(AppTheme.separator, lineWidth: 1)
         }
     }
 
@@ -91,7 +91,7 @@ struct JourneySearchPanel: View {
             } label: {
                 HStack(spacing: 14) {
                     Image(systemName: "clock")
-                        .foregroundStyle(.blue)
+                        .foregroundStyle(AppTheme.accent)
 
                     VStack(alignment: .leading, spacing: 3) {
                         Text(viewModel.timeMode.title)
@@ -111,7 +111,7 @@ struct JourneySearchPanel: View {
 
                     Image(systemName: "chevron.down")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(.blue)
+                        .foregroundStyle(AppTheme.accent)
                 }
             }
             .buttonStyle(.plain)
@@ -129,13 +129,13 @@ struct JourneySearchPanel: View {
             } label: {
                 Image(systemName: "slider.horizontal.3")
                     .font(.headline)
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(AppTheme.accent)
                     .padding(12)
-                    .background(.regularMaterial)
+                    .background(AppTheme.surface)
                     .clipShape(Circle())
                     .overlay {
                         Circle()
-                            .strokeBorder(.primary.opacity(0.05))
+                            .strokeBorder(AppTheme.separator, lineWidth: 1)
                     }
             }
             .accessibilityLabel("Resepreferenser")
@@ -170,7 +170,7 @@ struct JourneySearchPanel: View {
                         ? "circle.circle"
                         : "mappin.circle.fill"
                 )
-                .foregroundStyle(.blue)
+                .foregroundStyle(AppTheme.accent)
                 .font(.title3)
 
                 TextField(
@@ -227,7 +227,7 @@ struct JourneySearchPanel: View {
                         } label: {
                             HStack(spacing: 12) {
                                 Image(systemName: "tram.fill")
-                                    .foregroundStyle(.blue)
+                                    .foregroundStyle(AppTheme.accent)
 
                                 VStack(
                                     alignment: .leading,
@@ -259,6 +259,8 @@ struct JourneySearchPanel: View {
                     }
                 }
                 .padding(.leading, 32)
+                .padding(.top, 8)
+                .padding(.trailing, 4)
             }
         }
     }

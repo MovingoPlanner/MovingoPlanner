@@ -358,7 +358,7 @@ actor TrafikverketService {
         _ xml: String
     ) async throws -> [[String: Any]] {
         guard
-            let key = APIKeyStore.shared.trafikverketApiKey,
+            let key = await APIKeyStore.shared.trafikverketApiKey,
             !key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         else {
             throw ServiceError.missingAPIKey

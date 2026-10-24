@@ -233,15 +233,15 @@ struct TransportBadge: View {
         Group {
             if !lineNumber.isEmpty {
                 Text(lineNumber)
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: 15, weight: .bold))
                     .monospacedDigit()
                     .foregroundStyle(
                         badgeStyle == .ulMainBus && normalizedLine == "1"
                             ? Color.black
                             : Color.white
                     )
-                    .padding(.horizontal, badgeStyle == .commuterRail ? 7 : 6)
-                    .frame(minWidth: 24, minHeight: 20)
+                    .padding(.horizontal, badgeStyle == .commuterRail ? 10 : 9)
+                    .frame(minWidth: 30, minHeight: 27)
                     .background(badgeColor)
                     .clipShape(badgeShape)
                     .fixedSize()
@@ -268,6 +268,47 @@ struct TransportBadge: View {
         }
     }
 }
+
+
+struct TransportModeIcon: View {
+    let leg: JourneyLeg
+
+    private var category: String {
+        leg.Product?.first?.categoryName?.lowercased() ?? ""
+    }
+
+    private var productName: String {
+        leg.Product?.first?.name?.lowercased() ?? ""
+    }
+
+    private var symbol: String {
+        let type = category + " " + productName
+
+        if type.contains("buss") || type.contains("bus") {
+            return "bus.fill"
+        }
+
+        if type.contains("spårvagn") || type.contains("tram") {
+            return "tram.fill"
+        }
+        
+        if type.contains("tunnelbana") || type.contains("metro") {
+            return "tram.fill"
+        }
+
+        // Trains, commuter rail, metro and other rail services.
+        return "lightrail.fill"
+    }
+
+    var body: some View {
+        Image(systemName: symbol)
+            .font(.system(size: 25, weight: .medium))
+            .foregroundStyle(AppTheme.accent)
+            .frame(width: 44)
+            .accessibilityLabel("Transportmedel")
+    }
+}
+
 
 private struct TramBadgeShape: Shape {
     func path(in rect: CGRect) -> Path {

@@ -106,6 +106,9 @@
         }
       }
     },
+    "ANKOMST" : {
+
+    },
     "Anslutningar" : {
 
     },
@@ -162,6 +165,9 @@
           }
         }
       }
+    },
+    "AVGÅNG" : {
+
     },
     "Avser gångavstånd under resan. Faktisk filtrering kräver att avstånden kan hämtas från reseinformationen." : {
 
@@ -655,6 +661,9 @@
         }
       }
     },
+    "SPÅR" : {
+
+    },
     "Spår %@" : {
 
     },
@@ -759,6 +768,9 @@
       }
     },
     "Trafikverket" : {
+
+    },
+    "Transportmedel" : {
 
     },
     "Undvik operatörer" : {
