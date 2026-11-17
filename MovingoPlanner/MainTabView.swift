@@ -84,9 +84,19 @@ private struct SettingsHomeView: View {
                         systemImage: "key.horizontal"
                     )
                 }
+                
+                NavigationLink {
+                    TransportBadgeGalleryView()
+                } label: {
+                    Label(
+                        "Galleri av symboler",
+                        systemImage: "photo"
+                        
+                    )
+                }
             } header: {
                 Text("Anslutningar")
-            } footer: {
+            } footer: {	
                 Text(
                     "Hantera API-nycklar och anslutningar för appens tjänster."
                 )

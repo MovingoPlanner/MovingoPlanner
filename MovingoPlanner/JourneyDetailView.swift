@@ -162,9 +162,9 @@ struct JourneyDetailView: View {
 
                 Image(systemName: "arrow.right")
                     .font(.headline.weight(.semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppTheme.accent)
                     .frame(width: 38, height: 38)
-                    .background(.quaternary, in: Circle())
+                    .background(AppTheme.accent.opacity(0.12), in: Circle())
 
                 Spacer(minLength: 4)
 
@@ -324,7 +324,7 @@ struct JourneyDetailView: View {
                         .fill(isWalking || isTransfer
                               ? Color.secondary.opacity(0.12)
                               : AppTheme.accent.opacity(0.12))
-                        .frame(width: 44, height: 44)
+                        .frame(width: 36, height: 36)
 
                     legIcon(for: leg)
                     
@@ -336,7 +336,7 @@ struct JourneyDetailView: View {
                     .frame(minHeight: 34)
                     .padding(.top, 8)
             }
-            .frame(width: 44)
+            .frame(width: 36)
 
             VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {

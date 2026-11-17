@@ -78,7 +78,7 @@ actor TrafikverketService {
         guard
             leg.type == "JNY",
             let originID = leg.Origin.extId,
-            let departureDate = leg.Origin.dateTime
+            let departureDate =  await leg.Origin.dateTime
         else {
             return nil
         }

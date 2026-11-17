@@ -302,9 +302,9 @@ struct TransportModeIcon: View {
 
     var body: some View {
         Image(systemName: symbol)
-            .font(.system(size: 25, weight: .medium))
+            .font(.system(size: 18, weight: .medium))
             .foregroundStyle(AppTheme.accent)
-            .frame(width: 44)
+            .frame(width: 36, height: 36)
             .accessibilityLabel("Transportmedel")
     }
 }
