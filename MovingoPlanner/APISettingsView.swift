@@ -25,6 +25,14 @@ struct APISettingsView: View {
     @State private var testingTrafikverket = false
     @State private var trafikverketStatus: String?
     @State private var trafikverketSuccess = false
+    
+    // MARK: - Trafiklab Realtime State
+
+    @State private var realtimeKey = ""
+    @State private var showingRealtimeKey = false
+    @State private var testingRealtime = false
+    @State private var realtimeStatus: String?
+    @State private var realtimeSuccess = false
 
     // MARK: - API Key Status
 
@@ -35,6 +43,10 @@ struct APISettingsView: View {
 
     private var hasTrafikverketKey: Bool {
         APIKeyStore.shared.trafikverketApiKey != nil
+    }
+    
+    private var hasRealtimeKey: Bool {
+        APIKeyStore.shared.realtimeApiKey != nil
     }
 
     var body: some View {
@@ -157,6 +169,67 @@ struct APISettingsView: View {
             } footer: {
                 Text(
                     "Används för att hämta tågannonser och spårinformation. " +
+                    "Nyckeln lagras säkert i iOS Keychain."
+                )
+            }
+            
+            // MARK: Trafiklab Realtime
+
+            Section {
+                keyStatusRow(
+                    title: "Status",
+                    isConfigured: hasRealtimeKey
+                )
+
+                keyInput(
+                    title: "Trafiklab Realtime API-nyckel",
+                    text: $realtimeKey,
+                    isVisible: $showingRealtimeKey
+                )
+
+                Button {
+                    saveRealtimeKey()
+                } label: {
+                    Label(
+                        "Spara Realtime-nyckel",
+                        systemImage: "checkmark.circle"
+                    )
+                }
+                .disabled(isEmpty(realtimeKey))
+
+                Button {
+                    Task {
+                        await testRealtimeConnection()
+                    }
+                } label: {
+                    HStack {
+                        Label(
+                            "Testa anslutning",
+                            systemImage: "network"
+                        )
+
+                        Spacer()
+
+                        if testingRealtime {
+                            ProgressView()
+                        }
+                    }
+                }
+                .disabled(testingRealtime || !hasRealtimeKey)
+
+                if let realtimeStatus {
+                    statusLabel(
+                        realtimeStatus,
+                        success: realtimeSuccess
+                    )
+                }
+
+            } header: {
+                Text("Trafiklab Realtime")
+            } footer: {
+                Text(
+                    "Används för att hämta realtidsinformation om avgångar, " +
+                    "förseningar och inställda avgångar. " +
                     "Nyckeln lagras säkert i iOS Keychain."
                 )
             }
@@ -348,6 +421,55 @@ struct APISettingsView: View {
         } catch {
             trafikverketStatus = error.localizedDescription
             trafikverketSuccess = false
+        }
+    }
+    
+    // MARK: - Save Realtime
+
+    private func saveRealtimeKey() {
+        do {
+            try APIKeyStore.shared.saveRealtimeAPIKey(realtimeKey)
+
+            realtimeKey = ""
+            realtimeStatus = "Realtime-nyckeln sparades."
+            realtimeSuccess = true
+
+        } catch {
+            realtimeStatus = error.localizedDescription
+            realtimeSuccess = false
+        }
+    }
+
+    // MARK: - Test Realtime
+
+    @MainActor
+    private func testRealtimeConnection() async {
+        testingRealtime = true
+        realtimeStatus = nil
+
+        defer {
+            testingRealtime = false
+        }
+
+        do {
+            if !isEmpty(realtimeKey) {
+                try APIKeyStore.shared.saveRealtimeAPIKey(realtimeKey)
+                realtimeKey = ""
+            }
+
+            guard APIKeyStore.shared.realtimeApiKey != nil else {
+                throw APIKeyError.emptyKey
+            }
+
+            // We'll connect this to the actual departures
+            // endpoint once we implement the departure-board service.
+
+            realtimeStatus = "API-nyckeln finns sparad."
+            realtimeSuccess = true
+
+        } catch {
+            realtimeStatus = error.localizedDescription
+            realtimeSuccess = false
         }
     }
 }
